@@ -3,7 +3,7 @@ const STORAGE_KEY = "higher-education-record-demo";
 const defaultState = {
   name: "李雪涛",
   gender: "男",
-  birthDate: "2003-01-27",
+  birthDate: "2006-01-27",
   ethnicity: "汉族",
   idNumber: "",
   school: "北京理工大学",
@@ -16,9 +16,9 @@ const defaultState = {
   department: "",
   className: "",
   studentNumber: "1120211603",
-  enrollmentDate: "2021-08-27",
-  status: "不在籍（毕业）",
-  leavingDate: "2025-06-20",
+  enrollmentDate: "2026-08-27",
+  status: "在籍",
+  leavingDate: "2030-06-20",
   admissionPhoto: "",
   degreePhoto: ""
 };
@@ -37,7 +37,21 @@ const displayEmptyText = {
 function loadState() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    return saved && typeof saved === "object" ? { ...defaultState, ...saved } : { ...defaultState };
+    if (!saved || typeof saved !== "object") return { ...defaultState };
+
+    // Update only values that still match the previous built-in examples.
+    // User-edited values remain untouched in localStorage.
+    const legacyDefaults = {
+      birthDate: "2003-01-27",
+      enrollmentDate: "2021-08-27",
+      status: "不在籍（毕业）",
+      leavingDate: "2025-06-20"
+    };
+    Object.entries(legacyDefaults).forEach(([key, legacyValue]) => {
+      if (saved[key] === legacyValue) saved[key] = defaultState[key];
+    });
+
+    return { ...defaultState, ...saved };
   } catch (error) {
     return { ...defaultState };
   }
