@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#252525" />
+    <title>高等学籍</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="device-shell">
+      <div class="status-bar" aria-hidden="true">
+        <span class="status-time">7:40</span>
+        <div class="system-icons">
+          <span class="network">5G</span>
+          <span class="signal-bars"><i></i><i></i><i></i><i></i></span>
+          <span class="wifi-mark">⌁</span>
+          <span class="battery"><span>88</span></span>
+        </div>
+      </div>
+
+      <header class="app-header">
+        <button class="icon-button back-button" type="button" aria-label="返回">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+        </button>
+        <h1>高等学籍</h1>
+        <button class="edit-link" id="toggleEditor" type="button" aria-expanded="false">编辑</button>
+      </header>
+
+      <section class="page-content">
+        <section class="recommend-banner" aria-label="专业推荐">
+          <div class="banner-copy">
+            <div class="banner-title">专业推荐 <span>推荐</span></div>
+            <p>本校优势专业或特色专业</p>
+          </div>
+          <div class="banner-art" aria-hidden="true">
+            <div class="banner-screen"><span>▮▮</span></div>
+            <div class="banner-cap">◆</div>
+          </div>
+        </section>
+
+        <article class="record-card">
+          <div class="student-intro">
+            <div class="photo-pair">
+              <div class="photo-slot">
+                <label class="photo-label" for="admissionPhoto">
+                  <span class="photo-frame" data-photo-frame="admission">
+                    <span class="photo-placeholder" aria-hidden="true">
+                      <svg viewBox="0 0 80 96">
+                        <circle cx="40" cy="31" r="16" />
+                        <path d="M12 87c2-20 13-30 28-30s26 10 28 30Z" />
+                      </svg>
+                      <small>上传</small>
+                    </span>
+                  </span>
+                  <span class="photo-caption">录取照片</span>
+                </label>
+                <input id="admissionPhoto" data-photo-input="admission" type="file" accept="image/*" hidden />
+              </div>
+
+              <div class="photo-slot">
+                <label class="photo-label" for="degreePhoto">
+                  <span class="photo-frame" data-photo-frame="degree">
+                    <span class="photo-placeholder" aria-hidden="true">
+                      <svg viewBox="0 0 80 96">
+                        <circle cx="40" cy="31" r="16" />
+                        <path d="M12 87c2-20 13-30 28-30s26 10 28 30Z" />
+                      </svg>
+                      <small>上传</small>
+                    </span>
+                  </span>
+                  <span class="photo-caption">学历照片</span>
+                </label>
+                <input id="degreePhoto" data-photo-input="degree" type="file" accept="image/*" hidden />
+              </div>
+            </div>
+
+            <div class="identity-block">
+              <h2 data-display="name">李雪涛</h2>
+              <div class="identity-meta">
+                <span data-display="gender">男</span>
+                <span data-display="birthDate" data-display-date="true">2003年01月27日</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="school-line">
+            <span data-display="school">北京理工大学</span>
+            <span class="degree-badge" data-display="degree">本科</span>
+          </div>
+          <div class="major-line">
+            <span data-display="major">软件工程</span>
+            <span class="major-divider">|</span>
+            <span data-display="studyMode">普通全日制</span>
+          </div>
+        </article>
+
+        <dl class="details-list">
+          <div class="detail-row">
+            <dt>民族</dt>
+            <dd data-display="ethnicity">汉族</dd>
+          </div>
+          <div class="detail-row">
+            <dt>证件号码</dt>
+            <dd data-display="idNumber">待填写</dd>
+          </div>
+          <div class="detail-row">
+            <dt>学制</dt>
+            <dd data-display="duration">4 年</dd>
+          </div>
+          <div class="detail-row">
+            <dt>学历类别</dt>
+            <dd data-display="educationType">普通高等教育</dd>
+          </div>
+          <div class="detail-row">
+            <dt>分院</dt>
+            <dd data-display="college">—</dd>
+          </div>
+          <div class="detail-row">
+            <dt>系所</dt>
+            <dd data-display="department">—</dd>
+          </div>
+          <div class="detail-row">
+            <dt>班级</dt>
+            <dd data-display="className">—</dd>
+          </div>
+          <div class="detail-row">
+            <dt>学号</dt>
+            <dd data-display="studentNumber">1120211603</dd>
+          </div>
+          <div class="detail-row">
+            <dt>入学日期</dt>
+            <dd data-display="enrollmentDate" data-display-date="true">2021年08月27日</dd>
+          </div>
+          <div class="detail-row">
+            <dt>学籍状态</dt>
+            <dd data-display="status">不在籍（毕业）</dd>
+          </div>
+          <div class="detail-row">
+            <dt>离校日期</dt>
+            <dd data-display="leavingDate" data-display-date="true">2025年06月20日</dd>
+          </div>
+        </dl>
+
+        <button class="report-button" id="reportButton" type="button">查看验证报告</button>
+
+        <section class="editor-panel" id="editorPanel" hidden>
+          <div class="editor-heading">
+            <div>
+              <h2>编辑资料</h2>
+              <p>内容仅保存在当前浏览器中。</p>
+            </div>
+            <button class="close-editor" id="closeEditor" type="button" aria-label="收起编辑区">收起</button>
+          </div>
+
+          <form class="editor-form" id="editorForm">
+            <label>
+              姓名
+              <input class="form-control" data-input="name" type="text" autocomplete="name" />
+            </label>
+            <label>
+              性别
+              <select class="form-control" data-input="gender">
+                <option value="男">男</option>
+                <option value="女">女</option>
+                <option value="">未设置</option>
+              </select>
+            </label>
+            <label>
+              出生日期
+              <input class="form-control" data-input="birthDate" type="date" />
+            </label>
+            <label>
+              民族
+              <input class="form-control" data-input="ethnicity" type="text" />
+            </label>
+            <label class="field-wide">
+              证件号码
+              <input class="form-control" data-input="idNumber" type="text" inputmode="numeric" placeholder="请输入证件号码" />
+            </label>
+            <label>
+              学校
+              <input class="form-control" data-input="school" type="text" />
+            </label>
+            <label>
+              专业
+              <input class="form-control" data-input="major" type="text" />
+            </label>
+            <label>
+              学历
+              <select class="form-control" data-input="degree">
+                <option value="专科">专科</option>
+                <option value="本科">本科</option>
+                <option value="硕士">硕士</option>
+                <option value="博士">博士</option>
+              </select>
+            </label>
+            <label>
+              培养方式
+              <input class="form-control" data-input="studyMode" type="text" />
+            </label>
+            <label>
+              学制
+              <input class="form-control" data-input="duration" type="text" placeholder="例如：4 年" />
+            </label>
+            <label>
+              学历类别
+              <input class="form-control" data-input="educationType" type="text" />
+            </label>
+            <label>
+              分院
+              <input class="form-control" data-input="college" type="text" />
+            </label>
+            <label>
+              系所
+              <input class="form-control" data-input="department" type="text" />
+            </label>
+            <label>
+              班级
+              <input class="form-control" data-input="className" type="text" />
+            </label>
+            <label>
+              学号
+              <input class="form-control" data-input="studentNumber" type="text" />
+            </label>
+            <label>
+              入学日期
+              <input class="form-control" data-input="enrollmentDate" type="date" />
+            </label>
+            <label>
+              学籍状态
+              <select class="form-control" data-input="status">
+                <option value="">请选择</option>
+                <option value="在籍">在籍</option>
+                <option value="不在籍（毕业）">不在籍（毕业）</option>
+                <option value="休学">休学</option>
+                <option value="退学">退学</option>
+                <option value="保留学籍">保留学籍</option>
+              </select>
+            </label>
+            <label>
+              离校日期
+              <input class="form-control" data-input="leavingDate" type="date" />
+            </label>
+          </form>
+        </section>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
