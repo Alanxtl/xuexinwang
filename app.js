@@ -17,7 +17,7 @@ const defaultState = {
   className: "",
   studentNumber: "1120211603",
   enrollmentDate: "2026-08-27",
-  status: "在籍",
+  status: "在籍（注册学籍）",
   leavingDate: "2030-06-20",
   admissionPhoto: "",
   degreePhoto: ""
@@ -44,12 +44,14 @@ function loadState() {
     const legacyDefaults = {
       birthDate: "2003-01-27",
       enrollmentDate: "2021-08-27",
-      status: "不在籍（毕业）",
       leavingDate: "2025-06-20"
     };
     Object.entries(legacyDefaults).forEach(([key, legacyValue]) => {
       if (saved[key] === legacyValue) saved[key] = defaultState[key];
     });
+    if (saved.status === "在籍" || saved.status === "不在籍（毕业）") {
+      saved.status = defaultState.status;
+    }
 
     return { ...defaultState, ...saved };
   } catch (error) {
