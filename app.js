@@ -275,7 +275,7 @@ document.getElementById("resetButton").addEventListener("click", () => {
 });
 
 document.getElementById("reportButton").addEventListener("click", () => {
-  showToast("验证报告入口已保留，当前为静态演示页面");
+  showToast("网络错误！");
 });
 
 document.querySelector(".back-button").addEventListener("click", () => {
