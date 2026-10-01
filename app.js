@@ -185,6 +185,17 @@ document.getElementById("toggleEditor").addEventListener("click", () => {
 
 document.getElementById("closeEditor").addEventListener("click", () => setEditorOpen(false));
 
+document.getElementById("resetButton").addEventListener("click", () => {
+  if (!window.confirm("确定重置为默认资料吗？已填写的信息和上传的照片将被清除。")) return;
+  state = { ...defaultState };
+  document.querySelectorAll("[data-photo-input]").forEach((input) => {
+    input.value = "";
+  });
+  saveState();
+  render();
+  showToast("已重置为默认资料");
+});
+
 document.getElementById("reportButton").addEventListener("click", () => {
   showToast("验证报告入口已保留，当前为静态演示页面");
 });

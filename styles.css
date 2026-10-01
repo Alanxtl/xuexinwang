@@ -444,6 +444,22 @@ button {
   box-shadow: 0 0 0 3px rgba(41, 188, 139, 0.12);
 }
 
+.reset-button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 11px 16px;
+  border: 1px solid #dadada;
+  border-radius: 7px;
+  background: #fff;
+  color: #666;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.reset-button:active {
+  background: #f0f0f0;
+}
+
 .toast {
   position: fixed;
   right: 50%;
