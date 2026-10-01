@@ -138,6 +138,7 @@ function placeholderMarkup() {
 }
 
 function renderPhoto(kind) {
+  document.querySelector(`[data-clear-photo="${kind}"]`).hidden = !state[`${kind}Photo`];
   const frame = document.querySelector(`[data-photo-frame="${kind}"]`);
   if (!frame) return;
   frame.innerHTML = "";
@@ -178,6 +179,16 @@ function bindInputs() {
 }
 
 function bindPhotos() {
+  document.querySelectorAll("[data-clear-photo]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const kind = button.dataset.clearPhoto;
+      state[`${kind}Photo`] = "";
+      document.querySelector(`[data-photo-input="${kind}"]`).value = "";
+      renderPhoto(kind);
+      saveState();
+      showToast(kind === "admission" ? "已清除录取照片" : "已清除学历照片");
+    });
+  });
   document.querySelectorAll("[data-photo-input]").forEach((input) => {
     input.addEventListener("change", () => {
       const file = input.files && input.files[0];
