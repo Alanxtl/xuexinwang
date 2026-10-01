@@ -48,7 +48,6 @@
                   <span class="photo-caption">录取照片</span>
                 </label>
                 <input id="admissionPhoto" data-photo-input="admission" type="file" accept="image/*" hidden />
-                <button class="clear-photo" data-clear-photo="admission" type="button" aria-label="清除录取照片" hidden>清除照片</button>
               </div>
 
               <div class="photo-slot">
@@ -65,7 +64,6 @@
                   <span class="photo-caption">学历照片</span>
                 </label>
                 <input id="degreePhoto" data-photo-input="degree" type="file" accept="image/*" hidden />
-                <button class="clear-photo" data-clear-photo="degree" type="button" aria-label="清除学历照片" hidden>清除照片</button>
               </div>
             </div>
 
@@ -251,6 +249,10 @@
               <input class="form-control" data-input="leavingDate" type="date" />
             </label>
           </form>
+          <div class="photo-editor-actions">
+            <button class="clear-photo" data-clear-photo="admission" type="button" hidden>清除录取照片</button>
+            <button class="clear-photo" data-clear-photo="degree" type="button" hidden>清除学历照片</button>
+          </div>
           <button class="reset-button" id="resetButton" type="button">重置为默认资料</button>
         </section>
       </section>
