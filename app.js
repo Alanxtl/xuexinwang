@@ -25,6 +25,39 @@ const defaultState = {
 
 let state = loadState();
 let toastTimer;
+const ARCHIVE_KEY = `${STORAGE_KEY}-archives`;
+let archives = loadArchives();
+let activeName = Object.hasOwn(archives, state.name) ? state.name : "";
+
+function loadArchives() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(ARCHIVE_KEY) || "{}");
+    return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
+  } catch { return {}; }
+}
+
+function renderArchives() {
+  const select = document.getElementById("archiveSelect");
+  select.replaceChildren(new Option("请选择档案", ""));
+  Object.keys(archives).forEach((name) => select.add(new Option(name, name)));
+  select.value = activeName;
+}
+
+function storeArchive() {
+  const name = state.name.trim();
+  if (!name) { showToast("请先填写姓名"); return false; }
+  const updated = { ...archives, [name]: { ...state, name } };
+  try {
+    localStorage.setItem(ARCHIVE_KEY, JSON.stringify(updated));
+    archives = updated;
+    activeName = name;
+    renderArchives();
+    return true;
+  } catch {
+    showToast("存档失败：浏览器存储空间不足，请尝试使用较小的照片");
+    return false;
+  }
+}
 
 const displayEmptyText = {
   idNumber: "待填写",
@@ -65,6 +98,7 @@ function saveState() {
   } catch (error) {
     // Private browsing or a full storage quota should not prevent editing.
   }
+  if (activeName && state.name.trim() === activeName) storeArchive();
 }
 
 function formatDate(value) {
@@ -185,14 +219,47 @@ document.getElementById("toggleEditor").addEventListener("click", () => {
 
 document.getElementById("closeEditor").addEventListener("click", () => setEditorOpen(false));
 
+document.getElementById("saveArchive").addEventListener("click", () => {
+  const name = state.name.trim();
+  if (Object.hasOwn(archives, name) && activeName !== name &&
+      !window.confirm(`已有“${name}”的档案，确定覆盖吗？`)) return;
+  if (storeArchive()) showToast("档案已保存");
+});
+
+document.getElementById("archiveSelect").addEventListener("change", (event) => {
+  const name = event.target.value;
+  if (!Object.hasOwn(archives, name)) return;
+  if (state.name.trim() && !storeArchive()) { renderArchives(); return; }
+  activeName = name;
+  state = { ...defaultState, ...archives[name] };
+  document.querySelectorAll("[data-photo-input]").forEach((input) => { input.value = ""; });
+  saveState();
+  render();
+  renderArchives();
+  showToast(`已切换到${name}`);
+});
+
+document.getElementById("newArchive").addEventListener("click", () => {
+  if (state.name.trim() && !storeArchive()) return;
+  activeName = "";
+  state = { ...defaultState, name: "" };
+  document.querySelectorAll("[data-photo-input]").forEach((input) => { input.value = ""; });
+  saveState();
+  render();
+  renderArchives();
+  document.querySelector('[data-input="name"]').focus();
+});
+
 document.getElementById("resetButton").addEventListener("click", () => {
   if (!window.confirm("确定重置为默认资料吗？已填写的信息和上传的照片将被清除。")) return;
   state = { ...defaultState };
+  activeName = "";
   document.querySelectorAll("[data-photo-input]").forEach((input) => {
     input.value = "";
   });
   saveState();
   render();
+  renderArchives();
   showToast("已重置为默认资料");
 });
 
@@ -211,3 +278,4 @@ document.querySelector(".back-button").addEventListener("click", () => {
 bindInputs();
 bindPhotos();
 render();
+renderArchives();

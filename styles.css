@@ -444,6 +444,16 @@ button {
   box-shadow: 0 0 0 3px rgba(41, 188, 139, 0.12);
 }
 
+.archive-panel {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e7e7e7;
+}
+.archive-panel label { display: block; margin-bottom: 8px; font-size: 14px; }
+.archive-panel p { margin: 10px 0 0; color: #999; font-size: 12px; }
+.archive-actions { display: flex; gap: 10px; }
+.archive-actions .reset-button { margin-top: 10px; }
+
 .reset-button {
   width: 100%;
   margin-top: 20px;
